@@ -1,75 +1,41 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Chart from "chart.js/auto";
+import Select from "../components/Select";
+import Card from "../components/Card";
+import BarChart from "../components/BarChart";
+import API from "../components/util/API";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [accounts, setAccounts] = useState(null);
+  const [accounts, setAccounts] = useState([{}]);
   const [accountId, setAccountId] = useState("");
-  const [accountStatus, setAccountStatus] = useState(null);
-  const [accountCostsHistory, setAccountCostsHistory] = useState(null);
+  const [accountStats, setAccountStats] = useState({});
+  const [accountCostsHistory, setAccountCostsHistory] = useState([{}]);
 
-  const getAccounts = async () => {
-    try {
-      const response = await fetch(`https://hiring.oraculi.io/v1/accounts`);
-      if (response.ok) {
-        const responseJson = await response.json();
-        setAccounts(responseJson);
-        setAccountId(responseJson[0].id);
-      }
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
-
-  const getAccountStatus = async (accountParam) => {
-    if (!accountParam) {
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `https://hiring.oraculi.io/v1/accounts/${accountId}`
-      );
-      if (response.ok) {
-        const responseJson = await response.json();
-        setAccountStatus(responseJson);
-      }
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
-
-  const getAccountCostsHistory = async (accountParam) => {
-    if (!accountParam) {
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `https://hiring.oraculi.io/v1/accounts/${accountId}/history`
-      );
-      if (response.ok) {
-        const responseJson = await response.json();
-        setAccountCostsHistory(responseJson);
-      }
-    } catch (e) {
-      throw new Error(e);
-    }
-  };
-
-  const handleChange = ({ target }) => {
-    setAccountId(target.value);
-  };
-
+  /**
+   * On the first render, call the API
+   * to get the list of accounts and
+   * set the first one as the main
+   */
   useEffect(() => {
-    getAccounts();
+    API.getAccounts().then((data) => {
+      setAccounts(data);
+      setAccountId(data[0].id);
+    });
   }, []);
 
+  /**
+   * Once accountId has a new value,
+   * Fetches the account stats and
+   * costs history
+   */
   useEffect(() => {
-    setAccountId(accountId);
-    getAccountStatus(accountId);
-    getAccountCostsHistory(accountId);
+    API.getAccountStats(accountId).then((data) => setAccountStats(data));
+    API.getAccountCostsHistory(accountId).then((data) =>
+      setAccountCostsHistory(data)
+    );
   }, [accountId]);
 
   return (
@@ -82,50 +48,14 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1>Select your account</h1>
+        <Select accounts={accounts} setAccountId={setAccountId} />
 
-        <select onChange={handleChange}>
-          {!!accounts &&
-            accounts.map((account) => (
-              <option key={account.id} value={account.id}>
-                {account.provider} - {account.label}
-              </option>
-            ))}
-        </select>
+        <Card type="bill" title="Bill" accountStats={accountStats} />
+        <Card type="servers" title="Servers" accountStats={accountStats} />
+        <Card type="regions" title="Regions" accountStats={accountStats} />
+        <Card type="alarms" title="Alarms" accountStats={accountStats} />
 
-        <div>
-          <h1>Bill</h1>
-          {!!accountStatus && <p>{accountStatus.bill}</p>}
-        </div>
-
-        <div>
-          <h1>Servers</h1>
-          {!!accountStatus && <p>{accountStatus.servers}</p>}
-        </div>
-
-        <div>
-          <h1>Regions</h1>
-          {!!accountStatus && <p>{accountStatus.regions}</p>}
-        </div>
-
-        <div>
-          <h1>Alarms</h1>
-          {!!accountStatus && <p>{accountStatus.alarms}</p>}
-        </div>
-
-        <div>
-          <h1>Monthly costs</h1>
-          {!!accountCostsHistory &&
-            accountCostsHistory.map((costs) => (
-              <div key={costs.date}>
-                <p>{costs.date}</p>
-                {costs.groups.map((cost) => (
-                  <p key={cost.key}>
-                    {cost.key} - {cost.amount}
-                  </p>
-                ))}
-              </div>
-            ))}
-        </div>
+        <BarChart accountCostsHistory={accountCostsHistory} />
       </main>
     </div>
   );
