@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
+import styles from "../styles/Chart.module.css";
 
 function PieChart({ accountCostsHistory }) {
   const [chartData, setChartData] = useState();
@@ -15,9 +16,8 @@ function PieChart({ accountCostsHistory }) {
         ],
         datasets: [
           {
-            borderRadius: 30,
+            borderRadius: 20,
             backgroundColor: ["blue", "red", "green"],
-            barThickness: 15,
             data: [
               period.reduce(
                 (previous, current) => previous + current.groups[0].amount,
@@ -39,24 +39,29 @@ function PieChart({ accountCostsHistory }) {
   }, [accountCostsHistory]);
 
   const options = {
+    responsive: true,
     plugins: {
       legend: {
-        display: true,
-        labels: {
-          font: {
-            family: "Manrope"
-          }
-        }
+        display: false
       },
-      scales: {
-        r: {
-          pointLabels: {
-            display: true,
-            centerPointLabels: true,
-            font: {
-              size: 18
-            }
-          }
+      datalabels: {
+        formatter: (value, ctx) => {
+          let sum = 0;
+          const dataArr = ctx.chart.data.datasets[0].data;
+          dataArr.map((data) => {
+            sum += data;
+            return sum;
+          });
+          const percentage = `${((value * 100) / sum).toFixed(1)}%`;
+
+          return `${ctx.chart.data.labels[ctx.dataIndex]}\n${percentage}`;
+        },
+        textAlign: "center",
+        color: "white",
+        font: {
+          family: "Manrope",
+          weight: "bold",
+          size: 14
         }
       },
       tooltip: {
@@ -74,10 +79,8 @@ function PieChart({ accountCostsHistory }) {
   };
 
   return (
-    <div style={{ width: 350 }}>
-      <div>
-        <h1>Spend by service</h1>
-      </div>
+    <div className={`${styles.card} ${styles.pieChart}`}>
+      <p>Spend by service</p>
       {!!chartData && <Pie data={chartData} options={options} />}
     </div>
   );

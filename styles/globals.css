@@ -4,6 +4,18 @@ html,
 body {
   padding: 0;
   margin: 0;
+  --background-color: #f0f2fb;
+  --menu-background-color: #fafbff;
+  --card-background-color: var(--menu-background-color);
+  --select-background-color: #ffffff;
+  --border-color: #e8ecf5;
+  --text: 1rem;
+  --title: 1.5rem;
+  --subtitle: 1.25rem;
+  --text-opacity: 0.84;
+  --subtitle-opacity: 0.5;
+
+  background: var(--background-color);
 }
 
 a {

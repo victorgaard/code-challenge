@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import Chart from "chart.js/auto";
 import Select from "../components/Select";
-import Card from "../components/Card";
-import BarChart from "../components/BarChart";
+import Charts from "../components/Charts";
+import Cards from "../components/Cards";
 import API from "../components/util/API";
 import styles from "../styles/Home.module.css";
-import PieChart from "../components/PieChart";
 
 export default function Home() {
   const [accounts, setAccounts] = useState([{}]);
@@ -47,31 +44,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <nav className={styles.nav}>
+        <p>Select your account:</p>
+        <Select accounts={accounts} setAccountId={setAccountId} />
+      </nav>
+
       <main className={styles.main}>
-        <div style={{ margin: "2rem 0" }}>
-          <h1>Select your account</h1>
-          <Select accounts={accounts} setAccountId={setAccountId} />
-        </div>
-
-        <div style={{ display: "flex", gap: "4rem" }}>
-          <Card type="bill" title="Bill" accountStats={accountStats} />
-          <Card type="servers" title="Servers" accountStats={accountStats} />
-          <Card type="regions" title="Regions" accountStats={accountStats} />
-          <Card type="alarms" title="Alarms" accountStats={accountStats} />
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "4rem",
-            marginTop: "4rem",
-            flexWrap: "wrap",
-            justifyContent: "center"
-          }}
-        >
-          <BarChart accountCostsHistory={accountCostsHistory} />
-          <PieChart accountCostsHistory={accountCostsHistory} />
-        </div>
+        <Cards accountStats={accountStats} />
+        <Charts accountCostsHistory={accountCostsHistory} />
       </main>
     </div>
   );

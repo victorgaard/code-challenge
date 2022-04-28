@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import dateFormatter from "./util/dateFormatter";
+import styles from "../styles/Chart.module.css";
 
 function BarChart({ accountCostsHistory }) {
   const [chartData, setChartData] = useState();
@@ -38,11 +39,15 @@ function BarChart({ accountCostsHistory }) {
   }, [accountCostsHistory]);
 
   const options = {
+    responsive: true,
     interaction: {
       intersect: false,
       mode: "index"
     },
     plugins: {
+      datalabels: {
+        display: false
+      },
       legend: {
         position: "bottom",
         align: "end",
@@ -97,10 +102,8 @@ function BarChart({ accountCostsHistory }) {
   };
 
   return (
-    <div>
-      <div style={{ width: 700 }}>
-        <h1>Last 6 months spend by service</h1>
-      </div>
+    <div className={`${styles.card} ${styles.barChart}`}>
+      <p>Last 6 months spend by service</p>
       {!!chartData && <Bar data={chartData} options={options} />}
     </div>
   );

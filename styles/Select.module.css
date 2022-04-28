@@ -1,0 +1,26 @@
+.select {
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--select-background-color);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0 0.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+}
+.select:hover,
+.select:active,
+.select:focus {
+  border: 2px solid #d7ddea;
+}
+.select:active,
+.select:focus {
+  border: 2px solid #93969e;
+  outline: 3px solid rgba(0, 0, 0, 0.2);
+}
+.select option {
+  border: none;
+  border-radius: 4px;
+  padding: 1rem;
+}

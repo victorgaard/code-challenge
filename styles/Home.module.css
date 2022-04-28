@@ -1,6 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.nav {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background-color: var(--menu-background-color);
+  border-bottom: 2px solid var(--border-color);
+}
+.nav p {
+  opacity: var(--text-opacity);
+}
 .main {
+  max-width: 1075px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
+  margin-top: 5rem;
+  padding: 0 2rem;
 }

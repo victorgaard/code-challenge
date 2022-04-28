@@ -1,16 +1,44 @@
-function Card({ accountStats, type, title }) {
+import Image from "next/image";
+import styles from "../styles/Card.module.css";
+
+function Card({ accountStats, type }) {
   const handleType = (param) => {
-    if (param === "alarms") return accountStats.alarms;
-    if (param === "bill") return accountStats.bill;
-    if (param === "regions") return accountStats.regions;
-    if (param === "servers") return accountStats.servers;
+    if (param === "alarms") {
+      const img = "/vercel.svg";
+      const value = accountStats.alarms;
+      return [img, value];
+    }
+    if (param === "bill") {
+      const img = "/vercel.svg";
+      const value = `$${accountStats.bill}`;
+      return [img, value];
+    }
+    if (param === "regions") {
+      const img = "/vercel.svg";
+      const value = accountStats.regions;
+      return [img, value];
+    }
+    if (param === "servers") {
+      const img = "/vercel.svg";
+      const value = accountStats.servers;
+      return [img, value];
+    }
     return false;
   };
 
+  const formatter = (param) => param.charAt(0).toUpperCase() + param.slice(1);
+
   return (
-    <div>
-      <h1>{title}</h1>
-      {accountStats ? <p>{handleType(type)}</p> : <p>Loading...</p>}
+    <div className={styles.card}>
+      <Image src={handleType(type)[0]} width={50} height={50} />
+      <div className={styles.wrapper}>
+        <p className={styles.title}>{formatter(type)}</p>
+        {accountStats ? (
+          <p className={styles.value}>{handleType(type)[1]}</p>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
     </div>
   );
 }

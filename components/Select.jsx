@@ -1,3 +1,5 @@
+import styles from "../styles/Select.module.css";
+
 function Select({ accounts, setAccountId }) {
   /**
    * If the account changes, update
@@ -8,7 +10,7 @@ function Select({ accounts, setAccountId }) {
   };
 
   return (
-    <select onChange={handleChange}>
+    <select onChange={handleChange} className={styles.select}>
       {!!accounts &&
         accounts.map((account) => (
           <option key={account.id} value={account.id}>
