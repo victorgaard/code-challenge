@@ -15,22 +15,22 @@ function BarChart({ accountCostsHistory }) {
           {
             label: period[0].groups[0].key,
             borderRadius: 30,
-            backgroundColor: "blue",
-            barThickness: 15,
+            backgroundColor: "#00ff66",
+            barThickness: 10,
             data: period.map((month) => month.groups[0].amount)
           },
           {
             label: period[0].groups[1].key,
             borderRadius: 30,
-            backgroundColor: "red",
-            barThickness: 15,
+            backgroundColor: "#00bb4a",
+            barThickness: 10,
             data: period.map((month) => month.groups[1].amount)
           },
           {
             label: period[0].groups[2].key,
             borderRadius: 30,
-            backgroundColor: "green",
-            barThickness: 15,
+            backgroundColor: "#017831",
+            barThickness: 10,
             data: period.map((month) => month.groups[2].amount)
           }
         ]
@@ -40,6 +40,10 @@ function BarChart({ accountCostsHistory }) {
 
   const options = {
     responsive: true,
+    elements: {
+      backgroundColor: "white",
+      hoverBackgroundColor: "white"
+    },
     interaction: {
       intersect: false,
       mode: "index"
@@ -55,12 +59,16 @@ function BarChart({ accountCostsHistory }) {
           boxWidth: 8,
           usePointStyle: true,
           pointStyle: "circle",
+          color: "#bbc1c5",
           font: {
             family: "Manrope"
           }
         }
       },
       tooltip: {
+        backgroundColor: "#282828",
+        multiKeyBackground: "#282828",
+        boxPadding: 8,
         padding: 12,
         bodyFont: {
           family: "Manrope"
@@ -75,12 +83,12 @@ function BarChart({ accountCostsHistory }) {
         }
       }
     },
-
     scales: {
       xAxis: {
         display: true,
         grid: { lineWidth: 0, borderWidth: 0 },
         ticks: {
+          color: "#bbc1c5",
           font: {
             family: "Manrope"
           }
@@ -88,8 +96,9 @@ function BarChart({ accountCostsHistory }) {
       },
       yAxis: {
         display: true,
-        grid: { borderWidth: 0, color: "#e8ecf5" },
+        grid: { borderWidth: 0, color: "#292d31" },
         ticks: {
+          color: "#bbc1c5",
           font: {
             family: "Manrope"
           },

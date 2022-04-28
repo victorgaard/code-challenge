@@ -2,22 +2,24 @@
   height: 40px;
   cursor: pointer;
   border: none;
-  background-color: var(--select-background-color);
+  background-color: var(--accent-color);
   font-size: 1rem;
   font-weight: 700;
   padding: 0 0.5rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid transparent;
   border-radius: 4px;
+  color: var(--background-color);
+  transition: background-color 0.1s;
 }
 .select:hover,
 .select:active,
 .select:focus {
-  border: 2px solid #d7ddea;
+  border: 2px solid transparent;
+  background-color: #00ec5e;
 }
 .select:active,
 .select:focus {
-  border: 2px solid #93969e;
-  outline: 3px solid rgba(0, 0, 0, 0.2);
+  outline: 4px solid #00701c;
 }
 .select option {
   border: none;

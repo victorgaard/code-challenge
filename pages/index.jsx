@@ -44,12 +44,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className={styles.nav}>
-        <p>Select your account:</p>
-        <Select accounts={accounts} setAccountId={setAccountId} />
-      </nav>
-
       <main className={styles.main}>
+        <nav className={styles.nav}>
+          <p>Select your account:</p>
+          <Select accounts={accounts} setAccountId={setAccountId} />
+        </nav>
+
         <Cards accountStats={accountStats} />
         <Charts accountCostsHistory={accountCostsHistory} />
       </main>

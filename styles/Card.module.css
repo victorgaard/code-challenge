@@ -25,3 +25,9 @@
   font-weight: 700;
   padding-top: .5rem;
 }
+
+@media only screen and (max-width: 480px) {
+  .card {
+    padding: 1rem 1rem;
+  }
+}

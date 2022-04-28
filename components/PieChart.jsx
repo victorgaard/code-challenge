@@ -17,7 +17,8 @@ function PieChart({ accountCostsHistory }) {
         datasets: [
           {
             borderRadius: 20,
-            backgroundColor: ["blue", "red", "green"],
+            borderColor: "#373b3f",
+            backgroundColor: ["#00ff66", "#00bb4a", "#017831"],
             data: [
               period.reduce(
                 (previous, current) => previous + current.groups[0].amount,
@@ -57,7 +58,7 @@ function PieChart({ accountCostsHistory }) {
           return `${ctx.chart.data.labels[ctx.dataIndex]}\n${percentage}`;
         },
         textAlign: "center",
-        color: "white",
+        color: "#373b3f",
         font: {
           family: "Manrope",
           weight: "bold",
@@ -65,6 +66,9 @@ function PieChart({ accountCostsHistory }) {
         }
       },
       tooltip: {
+        backgroundColor: "#282828",
+        multiKeyBackground: "#282828",
+        boxPadding: 8,
         padding: 12,
         bodyFont: {
           family: "Manrope"

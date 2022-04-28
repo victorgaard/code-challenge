@@ -4,22 +4,22 @@ import styles from "../styles/Card.module.css";
 function Card({ accountStats, type }) {
   const handleType = (param) => {
     if (param === "alarms") {
-      const img = "/vercel.svg";
+      const img = "/alarms.svg";
       const value = accountStats.alarms;
       return [img, value];
     }
     if (param === "bill") {
-      const img = "/vercel.svg";
+      const img = "/bill.svg";
       const value = `$${accountStats.bill}`;
       return [img, value];
     }
     if (param === "regions") {
-      const img = "/vercel.svg";
+      const img = "/regions.svg";
       const value = accountStats.regions;
       return [img, value];
     }
     if (param === "servers") {
-      const img = "/vercel.svg";
+      const img = "/servers.svg";
       const value = accountStats.servers;
       return [img, value];
     }

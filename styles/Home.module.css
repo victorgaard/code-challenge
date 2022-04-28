@@ -1,21 +1,17 @@
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .nav {
-  position: fixed;
-  z-index: 10;
   width: 100%;
-  padding: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  background-color: var(--menu-background-color);
-  border-bottom: 2px solid var(--border-color);
+  gap: 1rem;
 }
 .nav p {
-  opacity: var(--text-opacity);
+  opacity: var(--subtitle-opacity);
+  font-weight: 500;
 }
 .main {
   max-width: 1075px;
@@ -23,6 +19,18 @@
   flex-direction: column;
   gap: 2rem;
   align-items: center;
-  margin-top: 5rem;
+  margin-top: 2rem;
   padding: 0 2rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .container {
+    margin-bottom: 11rem;
+  }
+  .main {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
 }

@@ -4,18 +4,20 @@ html,
 body {
   padding: 0;
   margin: 0;
-  --background-color: #f0f2fb;
-  --menu-background-color: #fafbff;
-  --card-background-color: var(--menu-background-color);
-  --select-background-color: #ffffff;
-  --border-color: #e8ecf5;
+  --accent-color: #00ff66;
+  --background-color: #282828;
+  --menu-background-color: var(--background-color);
+  --card-background-color: #373b3f;
+  --text-color: #ffffff;
+  --border-color: var(--menu-background-color);
   --text: 1rem;
   --title: 1.5rem;
   --subtitle: 1.25rem;
   --text-opacity: 0.84;
-  --subtitle-opacity: 0.5;
+  --subtitle-opacity: 0.7;
 
   background: var(--background-color);
+  color: var(--text-color);
 }
 
 a {
