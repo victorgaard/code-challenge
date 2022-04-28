@@ -12,21 +12,21 @@ function BarChart({ accountCostsHistory }) {
         labels: period.map((month) => dateFormatter(month.date)),
         datasets: [
           {
-            label: "Compute",
+            label: period[0].groups[0].key,
             borderRadius: 30,
             backgroundColor: "blue",
             barThickness: 15,
             data: period.map((month) => month.groups[0].amount)
           },
           {
-            label: "Storage",
+            label: period[0].groups[1].key,
             borderRadius: 30,
             backgroundColor: "red",
             barThickness: 15,
             data: period.map((month) => month.groups[1].amount)
           },
           {
-            label: "Network",
+            label: period[0].groups[2].key,
             borderRadius: 30,
             backgroundColor: "green",
             barThickness: 15,
@@ -38,6 +38,10 @@ function BarChart({ accountCostsHistory }) {
   }, [accountCostsHistory]);
 
   const options = {
+    interaction: {
+      intersect: false,
+      mode: "index"
+    },
     plugins: {
       legend: {
         position: "bottom",
@@ -58,15 +62,15 @@ function BarChart({ accountCostsHistory }) {
         },
         titleFont: {
           family: "Manrope"
+        },
+        callbacks: {
+          label(label) {
+            return `${label.dataset.label}: $${label.formattedValue}`;
+          }
         }
       }
     },
-    elements: {
-      bar: {
-        barPercentage: 0.3,
-        cetagoryPercentage: 1
-      }
-    },
+
     scales: {
       xAxis: {
         display: true,
@@ -94,12 +98,10 @@ function BarChart({ accountCostsHistory }) {
 
   return (
     <div>
-      <div>
+      <div style={{ width: 700 }}>
         <h1>Last 6 months spend by service</h1>
       </div>
-      {!!chartData && (
-        <Bar data={chartData} options={options} width={600} height={400} />
-      )}
+      {!!chartData && <Bar data={chartData} options={options} />}
     </div>
   );
 }

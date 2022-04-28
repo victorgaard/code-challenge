@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import BarChart from "../components/BarChart";
 import API from "../components/util/API";
 import styles from "../styles/Home.module.css";
+import PieChart from "../components/PieChart";
 
 export default function Home() {
   const [accounts, setAccounts] = useState([{}]);
@@ -17,7 +18,7 @@ export default function Home() {
   /**
    * On the first render, call the API
    * to get the list of accounts and
-   * set the first one as the main
+   * set the first one as default
    */
   useEffect(() => {
     API.getAccounts().then((data) => {
@@ -47,15 +48,30 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1>Select your account</h1>
-        <Select accounts={accounts} setAccountId={setAccountId} />
+        <div style={{ margin: "2rem 0" }}>
+          <h1>Select your account</h1>
+          <Select accounts={accounts} setAccountId={setAccountId} />
+        </div>
 
-        <Card type="bill" title="Bill" accountStats={accountStats} />
-        <Card type="servers" title="Servers" accountStats={accountStats} />
-        <Card type="regions" title="Regions" accountStats={accountStats} />
-        <Card type="alarms" title="Alarms" accountStats={accountStats} />
+        <div style={{ display: "flex", gap: "4rem" }}>
+          <Card type="bill" title="Bill" accountStats={accountStats} />
+          <Card type="servers" title="Servers" accountStats={accountStats} />
+          <Card type="regions" title="Regions" accountStats={accountStats} />
+          <Card type="alarms" title="Alarms" accountStats={accountStats} />
+        </div>
 
-        <BarChart accountCostsHistory={accountCostsHistory} />
+        <div
+          style={{
+            display: "flex",
+            gap: "4rem",
+            marginTop: "4rem",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}
+        >
+          <BarChart accountCostsHistory={accountCostsHistory} />
+          <PieChart accountCostsHistory={accountCostsHistory} />
+        </div>
       </main>
     </div>
   );
