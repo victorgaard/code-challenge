@@ -1,4 +1,4 @@
-Small react app built for Oraculi's [Front-end Code Challenge](https://github.com/mlabouardy/frontend-challenge) - Built with Nextjs and bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Small react app built for Oraculi's [Front-end Code Challenge](https://github.com/mlabouardy/frontend-challenge) - Built with Nextjs and bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
 ## Getting Started
 
